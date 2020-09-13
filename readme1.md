@@ -37,3 +37,44 @@ PS C:\Users\Taxi\Programs\fullscreen_google_map> flutter doctor -v
 • No issues found!
 PS C:\Users\Taxi\Programs\fullscreen_google_map>
 ```
+
+
+
+## flutter doctor output , before upgrading linux mint machine: 
+
+
+## september 13, 2020:
+
+
+```dart
+taxi@taxi-HP-ProBook-4540s:~/Desktop/afterAmjedJobMint$ flutter doctor -v 
+[✓] Flutter (Channel master, 1.22.0-10.0.pre.16, on Linux, locale en_US.UTF-8)
+    • Flutter version 1.22.0-10.0.pre.16 at /home/taxi/developmentFlutter
+    • Framework revision 719268b43a (13 days ago), 2020-09-01 00:33:04 +0800
+    • Engine revision 784e6d746e
+    • Dart version 2.10.0 (build 2.10.0-76.0.dev)
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+    • Android SDK at /home/taxi/Android/Sdk
+    • Platform android-30, build-tools 30.0.2
+    • ANDROID_HOME = /home/taxi/Android/Sdk
+    • Java binary at: /opt/android-studio/jre/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+    • All Android licenses accepted.
+
+[✓] Android Studio (version 4.0)
+    • Android Studio at /opt/android-studio
+    • Flutter plugin version 49.0.2
+    • Dart plugin version 193.7547
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+
+[✓] VS Code (version 1.48.2)
+    • VS Code at /usr/share/code
+    • Flutter extension version 3.14.1
+
+[!] Connected device
+    ! No devices available
+
+! Doctor found issues in 1 category.
+
+```
