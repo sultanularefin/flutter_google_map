@@ -1,4 +1,4 @@
-package com.linkup.fullscreen_google_map
+package com.mapbox.mapboxglexample
 
 import io.flutter.embedding.android.FlutterActivity
 

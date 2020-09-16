@@ -38,7 +38,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-//        applicationId "com.linkup.fullscreen_google_map"
+//        applicationId "com.mapbox.mapboxglexample"
 //        minSdkVersion 16
 
 //        versionCode flutterVersionCode.toInteger()
