@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fullscreen_google_map/src/DataLayer/models/UserInfo.dart';
+import 'package:fullscreen_google_map/src/Screens/UserModal.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
+// import 'package:geolocator/geolocator.dart';
 
 import 'package:fullscreen_google_map/main.dart';
 
@@ -71,20 +74,87 @@ class FullMapState extends State<FullMap> {
     super.dispose();
   }
 
+
+
+
+  _navigateToModalPage(
+      BuildContext context, CircleOptions z) async {
+
+
+
+    // final blocG = BlocProvider.of<FoodGalleryBloc>(context);
+    //
+    // List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
+    // List<SauceItem> tempSauceItems = blocG.getAllSauceItemsFoodGallery;
+    // List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
+
+    final UserInfo receivedUserInfo = await Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        transitionDuration: Duration(milliseconds: 900),
+        pageBuilder: (_, __, ___) =>
+          //   BlocProvider<FoodItemDetailsBloc>(
+          // bloc: FoodItemDetailsBloc(oneFoodItem, tempCheeseItems,
+          //     tempSauceItems, allExtraIngredients),
+          // child:
+          UserModal(
+              userPositionLatitude:z.geometry.latitude,
+              userPositionLongitude:z.geometry.longitude,
+              userName:''),
+
+      ),
+    );
+
+    logger.w('returned value : -------------------------------------');
+
+
+    print(' receivedUserInfo: ${receivedUserInfo.latitude}');
+    print(' receivedUserInfo: ${receivedUserInfo.longitude}');
+    print(' receivedUserInfo: ${receivedUserInfo.userName}');
+    return Navigator.pop(context,receivedUserInfo);
+
+
+    // receivedUserInfo
+
+
+  }
+
+
+
   void _onCircleTapped(Circle circle) {
+
+    logger.i('at _onCircleTapped');
+
     if (_selectedCircle != null) {
       _updateSelectedCircle(
-        const CircleOptions(circleRadius: 60),
+        const CircleOptions(
+            circleRadius: 60,
+          circleColor: "#FFFF34",
+        ),
       );
     }
+
+    _navigateToModalPage(context,circle.options);
+
+
     setState(() {
       _selectedCircle = circle;
     });
+
+
     _updateSelectedCircle(
       CircleOptions(
         circleRadius: 30,
+        circleColor: "#FFFF34",
+        //yellow-- green...
       ),
     );
+
+
+
+
+    
+
   }
 
   void _updateSelectedCircle(CircleOptions changes) {
@@ -93,37 +163,21 @@ class FullMapState extends State<FullMap> {
 
   void _add2(double currentLatitude3, double currentLongitude3) async{
 
-/*
-    String _id2 ='ss';
-    CircleOptions d = new CircleOptions(
-        geometry:LatLng(
+
+    Circle x = await mapController.addCircle(
+      CircleOptions(
+        geometry: LatLng(
+
+
             currentLatitude3,
             currentLongitude3
           // center.latitude + sin(_circleCount * pi / 6.0) / 20.0,
           // center.longitude + cos(_circleCount * pi / 6.0) / 20.0,
         ),
-        circleColor: "#FF0000"
-    );
+        circleColor: "#FF0000",
+        circleRadius:15,
 
-    final Map _data={
-      'x':12,
-      'y':13,
-    };
-
-
-    Circle x = new Circle(_id2,d,_data);
-
-    */
-
-    Circle x = await mapController.addCircle(
-      CircleOptions(
-          geometry: LatLng(
-              currentLatitude3,
-              currentLongitude3
-            // center.latitude + sin(_circleCount * pi / 6.0) / 20.0,
-            // center.longitude + cos(_circleCount * pi / 6.0) / 20.0,
-          ),
-          circleColor: "#FF0000"),
+      ),
     );
     setState(
             () {
@@ -144,36 +198,7 @@ class FullMapState extends State<FullMap> {
     else {
 
       logger.w('at else needs to update the circle....');
-      // void _youCanAddCircle( double currentLatitude2, double currentLongitude2) {
 
-      // removePreviousOneFirst(currentLatitude,currentLatitude);
-      // _remove();
-
-      // _changePosition(currentLatitude2,currentLongitude2);
-      // _add2(currentLatitude2,currentLongitude2);
-
-      /*
-      String _id2 ='ss';
-      CircleOptions d = new CircleOptions(
-          geometry:LatLng(
-              currentLatitude2,
-              currentLongitude2
-            // center.latitude + sin(_circleCount * pi / 6.0) / 20.0,
-            // center.longitude + cos(_circleCount * pi / 6.0) / 20.0,
-          ),
-          circleColor: "#FF0000"
-      );
-
-      final Map _data={
-        'x':12,
-        'y':13,
-      };
-
-
-      Circle x = new Circle(_id2,d,_data);
-
-
-      */
 
       mapController.removeCircle(_selectedCircle);
 

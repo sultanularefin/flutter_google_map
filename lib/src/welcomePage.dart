@@ -302,92 +302,9 @@ class _WelcomePageState extends State<WelcomePage> {
                     );
                     break;
                   case ConnectionState.active:
-                  /*
-                    return (snapshot.data is FirebaseUser) ?
 
-                    BlocProvider<FoodGalleryBloc>(
-                        bloc: FoodGalleryBloc(),
-                        child: FoodGallery2()
-
-                    )
-
-                    /*
-                    BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                        bloc2: AppBloc(
-                            emptyFoodItemWithDocID, []),
-                        /*
-                          child: BlocProvider<FoodItemDetailsBloc>(
-                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
-                              child: FoodGallery2()
-
-                          )
-                          */
-                        child: FoodGallery2()
-                    )
-              */
-                    /*
-                    BlocProvider<FoodGalleryBloc>(
-                        bloc: FoodGalleryBloc(),
-                        child: FoodGallery2()
-
-                    )*/ : LoginPage();
-//                  print('at ConnectionState.active of switch');
-                    break;
-
-
-                  case ConnectionState.done:
-//                  print('at ConnectionState.done of switch');
-//                break;
-
-
-                    return (snapshot.data is FirebaseUser) ?
-
-                    BlocProvider<FoodGalleryBloc>(
-                        bloc: FoodGalleryBloc(),
-                        child: FoodGallery2()
-
-                    )
-                    /*
-                    BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                        bloc2: AppBloc(
-                            emptyFoodItemWithDocID, []),
-                        /*
-                          child: BlocProvider<FoodItemDetailsBloc>(
-                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
-                              child: FoodGallery2()
-
-                          )
-                          */
-                        child: FoodGallery2()
-                    )
-                    */
-                    /*
-                    BlocProvider<FoodGalleryBloc>(
-                        bloc: FoodGalleryBloc(),
-                        child: FoodGallery2()
-
-                    )*/ : LoginPage();
-
-                    break;
-                    */
                   default:
-                    // return (snapshot.data is UserInfo) ?
 
-                    /*
-                    BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
-                        bloc2: AppBloc(
-                            emptyFoodItemWithDocID, [] /*,*/
-                            /* fromWhichPage: 0 */),
-                        /*
-                          child: BlocProvider<FoodItemDetailsBloc>(
-                              bloc:FoodItemDetailsBloc(emptyFoodItemWithDocID,emptyIngs ,fromWhichPage:0),
-                              child: FoodGallery2()
-
-                          )
-                          */
-                        child: FoodGallery2()
-                    )
-                    */
 
                     if(snapshot.data is UserInfo) {
                       UserInfo one = snapshot.data;
@@ -422,11 +339,12 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget unEditableUserInfoHomePage(
       UserInfo currentUser, BuildContext context) {
     return Container(
+      // color:Colors.blue,
       height: (
 
       displayHeight(context) -
           MediaQuery.of(context).padding.top -
-          MediaQuery.of(context).padding.bottom)/2,
+          MediaQuery.of(context).padding.bottom)/1.3,
 /* displayHeight(context) / 20 is the header of category of search || like pizza and /14 is the
       * container holding the logo*/
       child:
@@ -436,12 +354,15 @@ class _WelcomePageState extends State<WelcomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text('your current location\'s latitude: ${currentUser.latitude}'),
-            Text('your current location\'s longitude: ${currentUser.longitude}'),
-            Text('Your name: ${currentUser.userName}'),
 
+            SizedBox(height: 20,),
+            Text('your current location\'s longitude: ${currentUser.longitude}'),
+            SizedBox(height: 20,),
+            Text('Your name: ${currentUser.userName}'),
+            SizedBox(height: 40,),
             Container(
-              width: displayWidth(context) / 4,
-              height: displayHeight(context) / 24,
+              width: displayWidth(context) / 2,
+              height: displayHeight(context) / 12,
               child: RaisedButton(
                 color: Colors.red,
                 shape: RoundedRectangleBorder(
@@ -451,7 +372,8 @@ class _WelcomePageState extends State<WelcomePage> {
 //              alignment: Alignment.center,
                   child: Text(
                     //'peruuta'.toUpperCase(),
-                    'update you location',
+                    'update your location',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -469,6 +391,41 @@ class _WelcomePageState extends State<WelcomePage> {
                 },
               ),
             ),
+
+            SizedBox(height: 100,),
+            Container(
+
+              width: displayWidth(context) / 1.1,
+              height: 110,
+                  //displayHeight(context) / 2,
+
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color:Colors.blue,
+
+                  style: BorderStyle.solid,
+                  width: 2.0,
+                ),
+                shape: BoxShape.rectangle,
+              ),
+
+                  child: Text(
+                    //'peruuta'.toUpperCase(),
+                    'to update: please long press on the map to invoke the marker, which is red,'
+                        'then tap on the marker, to invoke a modal where you can write your name and hit the'
+                        'submit button',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.blueGrey,
+
+                      fontSize: 13,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+
+
+
           ],
         )
 
@@ -517,23 +474,7 @@ class _WelcomePageState extends State<WelcomePage> {
     }
 
 
-    // final blocG = BlocProvider.of<FoodGalleryBloc>(context);
-
-    // List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
-    // List<SauceItem> tempSauceItems = blocG.getAllSauceItemsFoodGallery;
-    // List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
-
-    /*
-    final UserInfo received_LocatoinInformation = await Navigator.of(context).push(MaterialPageRoute<void>(
-        builder: (_) => Scaffold(
-          appBar: AppBar(title: Text(page.title)),
-          body: page,
-        )));
-
-    */
-
-
-    final UserInfo received_LocatoinInformation = await Navigator.of(context).push(
+    final UserInfo receivedUserInfo = await Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
         transitionDuration: Duration(milliseconds: 900),
@@ -552,34 +493,36 @@ class _WelcomePageState extends State<WelcomePage> {
 // After the Selection Screen returns a result, hide any previous snackbars
 // and show the new result.
 
-    if (received_LocatoinInformation != null) {
+    if (receivedUserInfo != null) {
 //      print('| | | | | | | |   receivedSelectedFood.quantity: ${receivedSelectedFood.quantity}');
 
       print(
-          '| | | | | | | |   received_LocatoinInformations: ${received_LocatoinInformation}');
+          '| | | | | | | |   received_LocatoinInformations: ${receivedUserInfo}');
+
+      final homeBlocUserInfo = BlocProvider.of<HomeBloc>(context);
+
+
+
+      homeBlocUserInfo.updateThisUserInfo(
+          receivedUserInfo);
+
+      // homeBlocUserInfo
+
+
+
 
 
       Scaffold.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(SnackBar(
-            content: Text("selected location ${received_LocatoinInformation}")));
+            duration: const Duration(milliseconds: 2000),
+            content: Text("${receivedUserInfo.userName}: we got your location.")));
+
+
 //      setState(() => _reloadRequired = true);
 
 
 
-    // invoke bloc again...
-    //   update the bloc upon receiving new input
-      /*
-      setState(() {
-        _totalCount = _totalCount + receivedSelectedFood.quantity;
-        allSelectedFoodGallery.add(receivedSelectedFood);
-        totalPriceState =
-            totalPriceState + currentFoodItemQuantity * unitPricecurrentFood;
-      });
-
-      */
-
-// bloc 1.
 
     } else {
       Scaffold.of(context)

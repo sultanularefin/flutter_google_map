@@ -94,17 +94,30 @@ class HomeBloc implements Bloc {
 
 
 
+  void updateThisUserInfo(UserInfo updateUserInfo) async{
+
+    UserInfo _thisUserConstructor = new UserInfo(
+
+      latitude: updateUserInfo.latitude,
+      longitude:updateUserInfo.longitude,
+      userName: updateUserInfo.userName,
+    );
+
+
+
+    _thisUser = _thisUserConstructor;
+    _userInfoController.sink.add(_thisUser);
+
+  }
+
 
   void initiateThisUserInfoConstructor()
   {
 
-
-
-
     UserInfo _thisUserConstructor = new UserInfo(
 
-      latitude:'23.684994',
-      longitude:'90.356331',
+      latitude:0.0,
+      longitude:0.0,
       userName:'null',
     );
 
@@ -137,11 +150,6 @@ class HomeBloc implements Bloc {
     // getUserLocationFromGoogleMapConstructor();
 
 
-
-    // need to use this when moving to food Item Details page.
-
-
-    print('at FoodGalleryBloc()');
 
 
   }
