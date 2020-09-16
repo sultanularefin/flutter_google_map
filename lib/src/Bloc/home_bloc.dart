@@ -23,24 +23,25 @@ class HomeBloc implements Bloc {
 
 
 
-  List<UserInfo> _allFoodsList=[];
+
 
 
   bool _isDisposedConstructorMapInHomePage =false;
 
   final _client = FirebaseClientAdmin();
 
-  List<UserInfo> get allFoodItems => _allFoodsList;
 
-  final _foodItemController = StreamController <List<UserInfo>>();
-
-
-  Stream<List<UserInfo>> get foodItemsStream => _foodItemController.stream;
+  UserInfo _thisUser;
+  UserInfo get getNewUserInfo => _thisUser;
+  final _userInfoController = StreamController <UserInfo>();
+  Stream<UserInfo> get userInfoStream => _userInfoController.stream;
 
 
 
 
 //  Future<List<UserInfo>> getAllFoodItems() async {
+
+  /*
   void getUserLocationFromGoogleMapConstructor() async {
 
     print('at getAllFoodItemsConstructor()');
@@ -53,7 +54,7 @@ class HomeBloc implements Bloc {
 
       var snapshot = await _client.invokeMap();
 
-      List<UserInfo> tempAllFoodsList= new List<UserInfo>();
+      List<UserInfo> tempAllFoodsList = new List<UserInfo>();
       snapshot.docs.forEach((doc) {
 
         Map getDocs = doc.data();
@@ -88,8 +89,36 @@ class HomeBloc implements Bloc {
   }
 
 
+   */
 
 
+
+
+
+  void initiateThisUserInfoConstructor()
+  {
+
+
+
+
+    UserInfo _thisUserConstructor = new UserInfo(
+
+      latitude:'23.684994',
+      longitude:'90.356331',
+      userName:'null',
+    );
+
+
+
+    _thisUser = _thisUserConstructor;
+    _userInfoController.sink.add(_thisUser);
+
+
+//    initiateAllMultiSelectOptions();
+
+    // _orderTypeController.sink.add(_orderType);
+
+  }
 
   // CONSTRUCTOR BIGINS HERE..
   HomeBloc() {
@@ -97,12 +126,15 @@ class HomeBloc implements Bloc {
     print('at HomeBlocc()');
 
 
+    initiateThisUserInfoConstructor();
 
 //    getAllIngredientsConstructor();
 
     // getAllExtraIngredientsConstructor();
 
-    getUserLocationFromGoogleMapConstructor();
+
+// THIS NEED TO BE INVOKED FROM FRONT-END NOT FROM CONSTRUCTOR
+    // getUserLocationFromGoogleMapConstructor();
 
 
 
@@ -122,7 +154,8 @@ class HomeBloc implements Bloc {
   // 4
   @override
   void dispose() {
-    _foodItemController.close();
+    _userInfoController.close();
+    // _foodItemController.close();
 
     // _allExtraIngredientItemsController.close();
 

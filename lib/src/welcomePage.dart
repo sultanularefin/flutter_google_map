@@ -146,10 +146,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
         child: StreamBuilder<UserInfo>(
 
-            stream: homeBlocUserInfo.
-            getCurrentFirebaseUserStream,
-            initialData: homeBlocUserInfo.
-            getCurrentFirebaseUser,
+            initialData: homeBlocUserInfo.getNewUserInfo,
+            stream: homeBlocUserInfo.userInfoStream,
             builder: (context, snapshot) {
 //              switch (snapshot.connectionState){
 //                case ConnectionState.waiting:
@@ -194,7 +192,7 @@ class _WelcomePageState extends State<WelcomePage> {
 //                );
 //              }
 
-           //   print('snapshot.hasData: ${snapshot.hasData}');
+              //   print('snapshot.hasData: ${snapshot.hasData}');
 
 
               if (snapshot.hasError) {
@@ -303,7 +301,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     );
                     break;
                   case ConnectionState.active:
-                    /*
+                  /*
                     return (snapshot.data is FirebaseUser) ?
 
                     BlocProvider<FoodGalleryBloc>(
@@ -372,7 +370,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     break;
                     */
                   default:
-                    return (snapshot.data is User) ?
+                    return (snapshot.data is UserInfo) ?
 
                     /*
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
@@ -391,11 +389,14 @@ class _WelcomePageState extends State<WelcomePage> {
                     */
 
 
-                    BlocProvider<FoodGalleryBloc>(
-                        bloc: FoodGalleryBloc(),
-                        child: FoodGallery2()
-
-                    ) : LoginPage();
+                    Container(
+                        child:
+                        Text('User Info data found can be null');
+                    ):
+                    Container(
+                        child:
+                        Text('bbb')
+                    );
                 }
               }
             }
