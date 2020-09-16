@@ -523,21 +523,31 @@ class _WelcomePageState extends State<WelcomePage> {
     // List<SauceItem> tempSauceItems = blocG.getAllSauceItemsFoodGallery;
     // List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
 
+    /*
+    final UserInfo received_LocatoinInformation = await Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (_) => Scaffold(
+          appBar: AppBar(title: Text(page.title)),
+          body: page,
+        )));
+
+    */
+
+
     final UserInfo received_LocatoinInformation = await Navigator.of(context).push(
       PageRouteBuilder(
         opaque: false,
         transitionDuration: Duration(milliseconds: 900),
         pageBuilder: (_, __, ___) =>
 
-          //   BlocProvider<FoodItemDetailsBloc>(
-          // bloc: FoodItemDetailsBloc(oneFoodItem, tempCheeseItems,
-          //     tempSauceItems, allExtraIngredients),
-          // child:
+            Scaffold(
+              appBar: AppBar(title: Text('please select your location')),
+              body: FullMap(),
+            )
 
-          FullMap(),
         ),
 
     );
+
 
 // After the Selection Screen returns a result, hide any previous snackbars
 // and show the new result.
