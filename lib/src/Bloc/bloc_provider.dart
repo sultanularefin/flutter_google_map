@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:fullscreen_google_map/src/BLoC/bloc.dart';
+// import 'package:fullscreen_google_map/src/BLoC/bloc.dart';
+import 'package:fullscreen_google_map/src/Bloc/bloc.dart';
 
 class BlocProvider<T extends Bloc> extends StatefulWidget {
 

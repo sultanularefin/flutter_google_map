@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fullscreen_google_map/src/BLoC/bloc_provider.dart';
+// import 'package:fullscreen_google_map/src/BLoC/bloc_provider.dart';
+import 'package:fullscreen_google_map/src/Bloc/bloc_provider.dart';
 import 'package:fullscreen_google_map/src/Bloc/home_bloc.dart';
 import 'package:fullscreen_google_map/src/welcomePage.dart';
 

@@ -5,6 +5,7 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:fullscreen_google_map/src/Bloc/bloc_provider.dart';
 import 'package:fullscreen_google_map/src/Bloc/home_bloc.dart';
 
 
@@ -20,7 +21,7 @@ import 'package:fullscreen_google_map/src/utilities/screen_size_reducers.dart';
 
 /*  Block related Files BELOW */
 
-import 'package:fullscreen_google_map/src/BLoC/bloc_provider.dart';
+// import 'package:fullscreen_google_map/src/BLoC/bloc_provider.dart';
 // import 'package:fullscreen_google_map/src/BLoC/ho.dart';
 // import 'package:fullscreen_google_map/src/screens/foodGallery/foodgallery2.dart';
 
