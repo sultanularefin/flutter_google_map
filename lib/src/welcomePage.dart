@@ -9,6 +9,7 @@ import 'package:fullscreen_google_map/src/Bloc/home_bloc.dart';
 
 
 import 'package:fullscreen_google_map/src/DataLayer/models/UserInfo.dart';
+import 'package:fullscreen_google_map/src/Screens/full_map.dart';
 
 // import 'package:fullscreen_google_map/src/identity/loginPage.dart';
 
@@ -370,7 +371,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     break;
                     */
                   default:
-                    return (snapshot.data is UserInfo) ?
+                    // return (snapshot.data is UserInfo) ?
 
                     /*
                     BlocProvider2(/*thisAllIngredients2:welcomPageIngredients, */
@@ -388,15 +389,26 @@ class _WelcomePageState extends State<WelcomePage> {
                     )
                     */
 
+                    if(snapshot.data is UserInfo) {
+                      UserInfo one = snapshot.data;
+                      return
 
-                    Container(
-                        child:
-                        Text('User Info data found can be null'),
-                    ):
-                    Container(
-                        child:
-                        Text('bbb')
-                    );
+
+                        Container(
+                          child:
+                          unEditableUserInfoHomePage(one, context),
+                          // Text('User Info data found can be null!!!'),
+                        );
+                    }
+                    else{
+                      return Column(
+                        children: [
+                          new CircularProgressIndicator(),
+                          Container(child: Text('something went wrong || loading........ ...'),),
+                          new CircularProgressIndicator(),
+                        ],
+                      );
+                    }
                 }
               }
             }
@@ -406,4 +418,166 @@ class _WelcomePageState extends State<WelcomePage> {
 
     );
   }
+
+  Widget unEditableUserInfoHomePage(
+      UserInfo currentUser, BuildContext context) {
+    return Container(
+      height: (
+
+      displayHeight(context) -
+          MediaQuery.of(context).padding.top -
+          MediaQuery.of(context).padding.bottom)/2,
+/* displayHeight(context) / 20 is the header of category of search || like pizza and /14 is the
+      * container holding the logo*/
+      child:
+
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('your current location\'s latitude: ${currentUser.latitude}'),
+            Text('your current location\'s longitude: ${currentUser.longitude}'),
+            Text('Your name: ${currentUser.userName}'),
+
+            Container(
+              width: displayWidth(context) / 4,
+              height: displayHeight(context) / 24,
+              child: RaisedButton(
+                color: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(35.0),
+                ),
+                child: Container(
+//              alignment: Alignment.center,
+                  child: Text(
+                    //'peruuta'.toUpperCase(),
+                    'update you location',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  print(' update button pressed to update locatoin ....');
+
+                 return _navigateAndDisplaySelection(context);
+//                  return Navigator.pop(context,cancelPaySelect);
+
+//                  return Navigator.pop(context,expandedFoodReturnTemp);
+                },
+              ),
+            ),
+          ],
+        )
+
+
+
+
+    );
+  }
+
+  _navigateAndDisplaySelection(
+      BuildContext context) async {
+
+
+
+
+//          final Permission permission= Permission.contacts;
+    final Permission permission= Permission.location;
+    print('at Future<void> requestPermission $permission');
+
+    final status = await permission.request();
+
+    print('status: $status');
+
+    switch (status) {
+      case PermissionStatus.granted:
+        print('PermissionStatus.granted');
+        // do something
+        break;
+      case PermissionStatus.denied:
+        print('PermissionStatus.denied');
+        // do something
+        break;
+      case PermissionStatus.restricted:
+        print('PermissionStatus.restricted');
+        // do something
+        break;
+      case PermissionStatus.permanentlyDenied:
+        print('PermissionStatus.permanentlyDenied');
+        // do something
+        break;
+      case PermissionStatus.undetermined:
+        print('PermissionStatus.undetermined');
+        // do something
+        break;
+      default:
+    }
+
+
+    // final blocG = BlocProvider.of<FoodGalleryBloc>(context);
+
+    // List<CheeseItem> tempCheeseItems = blocG.getAllCheeseItemsFoodGallery;
+    // List<SauceItem> tempSauceItems = blocG.getAllSauceItemsFoodGallery;
+    // List<NewIngredient> allExtraIngredients = blocG.getAllExtraIngredients;
+
+    final UserInfo received_LocatoinInformation = await Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        transitionDuration: Duration(milliseconds: 900),
+        pageBuilder: (_, __, ___) =>
+
+          //   BlocProvider<FoodItemDetailsBloc>(
+          // bloc: FoodItemDetailsBloc(oneFoodItem, tempCheeseItems,
+          //     tempSauceItems, allExtraIngredients),
+          // child:
+
+          FullMap(),
+        ),
+
+    );
+
+// After the Selection Screen returns a result, hide any previous snackbars
+// and show the new result.
+
+    if (received_LocatoinInformation != null) {
+//      print('| | | | | | | |   receivedSelectedFood.quantity: ${receivedSelectedFood.quantity}');
+
+      print(
+          '| | | | | | | |   received_LocatoinInformations: ${received_LocatoinInformation}');
+
+
+      Scaffold.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+            content: Text("selected location ${received_LocatoinInformation}")));
+//      setState(() => _reloadRequired = true);
+
+
+
+    // invoke bloc again...
+    //   update the bloc upon receiving new input
+      /*
+      setState(() {
+        _totalCount = _totalCount + receivedSelectedFood.quantity;
+        allSelectedFoodGallery.add(receivedSelectedFood);
+        totalPriceState =
+            totalPriceState + currentFoodItemQuantity * unitPricecurrentFood;
+      });
+
+      */
+
+// bloc 1.
+
+    } else {
+      Scaffold.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text("selected 0 items")));
+    }
+  }
 }
+
+
+

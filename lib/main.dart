@@ -10,6 +10,16 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+
+
+  //FIXME: Add your Mapbox access token here
+  // static const String ACCESS_TOKEN = "YOUR_TOKEN_HERE";
+
+  static const String ACCESS_TOKEN = "sk.eyJ1IjoiYXJlZmluc3VsdGFuIiwiYSI6ImNrZjJsZHZudTEzbGwyeXBoaHV4am85YzgifQ.JtyBQWqa8pG6vHH9KsIUNA";
+
+
+
   @override
   Widget build(BuildContext context) {
     return
