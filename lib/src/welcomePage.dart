@@ -391,7 +391,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
                     Container(
                         child:
-                        Text('User Info data found can be null');
+                        Text('User Info data found can be null'),
                     ):
                     Container(
                         child:
